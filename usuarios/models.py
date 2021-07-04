@@ -14,7 +14,7 @@ class Usuario(AbstractUser):
     provincia = models.CharField(max_length=20)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'cuilcuit', 'telefono', 'domicilio', 'ciudad', 'provincia']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'cuilcuit', 'telefono', 'domicilio', 'ciudad', 'provincia']
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.username

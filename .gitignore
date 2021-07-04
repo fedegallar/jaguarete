@@ -2,7 +2,9 @@
 .vscode/
 ./product_images/
 ./db.sqlite3
-*.pdf
-*.pyc
-
+**/*.pdf
+**/*.pyc
+**/*.jpg
+**/*.jpeg
+**/*.png
 db.sqlite3

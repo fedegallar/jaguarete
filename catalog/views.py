@@ -3,7 +3,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 
 from .models import Category, Product
-from .forms import AddToCarritoForm, ProductForm
+from .forms import ProductForm
+from carrito.forms import AddToCarritoForm
 # Create your views here.
 
 

@@ -24,7 +24,7 @@
                             {% if user.is_authenticated %}
                             <li><a href="{% url 'usuarios:logout' %}">Logout</a></li>
                             <li><a href="{% url 'usuarios:edit' %}">Mi cuenta</a></li>
-                            <li><a href="#">Carrito</a></li>
+                            <li><a href="{% url 'carrito:index' %}">Carrito</a></li>
                             {% else %}
                             <li><a href="{% url 'usuarios:login' %}">Login</a></li>
                             <li><a href="{% url 'usuarios:register' %}">Registro</a></li>

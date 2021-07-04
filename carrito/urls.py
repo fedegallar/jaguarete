@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import AddProductoToCarrito
+from .views import AddProductoToCarrito, index
 
 app_name="carrito"
 
 urlpatterns = [
- path('addProductToCarrito', AddProductoToCarrito, name='AddProductToCarrito')   
+    path('', index, name='index'),
+    path('addProductToCarrito', AddProductoToCarrito, name='AddProductToCarrito')   
 ]

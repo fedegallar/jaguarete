@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card-panel card-margin-sides">
+        <form method="POST" action="{% url 'catalog:new-product' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h5>{{title}}</h5>
+            <hr>
+            <div class="row">
+                <label for="{{ formulario.title.id_for_label }}">Título:</label>
+                <div class="input-field">
+                    {{ formulario.title }}
+                </div>
+            </div>
+            <div class="row valign-wrapper">
+                <div class="col s6 left-align">
+                    <label for="{{ formulario.image.id_for_label }}">Imágen:</label>
+                    <div class="input-field">
+                        {{ formulario.image }}
+                    </div>
+                </div>
+                <div class="col s6">
+                    <label for="{{ formulario.category.id_for_label }}">Categoria:</label>
+                    <div>
+                        {{ formulario.category }}
+                    </div>                
+                    <label for="{{ formulario.description.id_for_label }}">Descripción:</label>
+                    <div class="inputfield">
+                        {{ formulario.description }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <label for="{{ formulario.price.id_for_label }}">Precio:</label>
+                    <div class="input-field">
+                        {{ formulario.price }}
+                    </div>
+                </div>
+                <div class="col s6">
+                    <label for="{{ formulario.stock.id_for_label }}">Stock:</label>
+                    <div class="input-field">
+                        {{ formulario.stock }}
+                    </div>
+                </div>
+            </div>
+            <div class="row right-align">
+                <button type="submit" class="aves-effect waves-light btn-small">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'js/form.js' %}"></script>
+{% endblock %}

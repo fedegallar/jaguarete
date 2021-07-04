@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card-panel card-margin-sides">
+        <form method="POST" action="{% url 'catalog:category:new' %}">
+            {% csrf_token %}
+            <div class="row">
+                <label for="{{ categoryForm.description.id_for_label }}">Descripción:</label>
+                <div class="input-field">
+                    {{ categoryForm.description }}
+                </div>
+            </div>
+            <div class="row">
+                <label for="{{ categoryForm.icon.id_for_label }}">Icono:</label>
+                <div class="input-field">
+                    {{ categoryForm.icon }}
+                </div>
+            </div>
+            <div class="row right-align">
+                <button type="submit" class="aves-effect waves-light btn-small">Guardar categoria</button>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'js/form.js' %}"></script>
+{% endblock %}

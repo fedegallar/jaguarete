@@ -1,0 +1,7 @@
+<ul id="dropdown1" class="dropdown-content">
+    {% for category in categories %}
+    <li>{{ category.description }}</li>
+    {% endfor %}
+    <li class="divider"></li>
+    <li><a href="{% url 'catalog:category:new' %}">Nueva categoria</a></li>
+</ul>

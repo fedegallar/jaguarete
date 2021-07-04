@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaguarete Kaa S.A</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+    {% load static %}
+    <script src="{% static 'base.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+    <body>
+        <header>
+            <nav class="nav-extended">
+                <div class="row">
+                    <div class="col s9">
+                        <a href="#" class="brand-logo">Jaguarete Kaa S.A</a>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    </div>
+                    <div class="col s3 align-right">
+                        <ul id="nav-mobile" class="hide-on-med-and-down">
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'usuarios:logout' %}">Logout</a></li>
+                            <li><a href="{% url 'usuarios:edit' %}">Mi cuenta</a></li>
+                            <li><a href="#">Carrito</a></li>
+                            {% else %}
+                            <li><a href="{% url 'usuarios:login' %}">Login</a></li>
+                            <li><a href="{% url 'usuarios:register' %}">Registro</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s9 m9 l9">
+                        <ul class="left hide-on-med-and-down">
+                            <li><a href="{% url 'catalog:index' %}">Home<i class="large material-icons left">home</i></a></li>
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="{% url 'catalog:about' %}">Acerca de...</a></li>
+                            <li><a href="{% url 'catalog:new-product' %}">Nuevo producto<i class="material-icons right">add</i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col s3 m3 l3">
+                        <form class="hide-on-med-and-down" method="GET" action="{% url 'catalog:find_by_title' %}">
+                            <div class="input-field">
+                                <input id="search" name="search" type="search" class="grey lighten-5" placeholder="Buscar..." required>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            {% include "menu/sidenav.html" %}
+        </header>
+        {% include "catalog/categories/category_menu.html" %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+        <footer>
+        </footer>
+    </body>
+</html>

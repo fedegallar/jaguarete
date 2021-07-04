@@ -1,0 +1,29 @@
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="#" class="brand-logo">Jaguarete Kaa S.A</a></li>
+    <li><hr></li>
+    {% if user.is_authenticated %}
+            <li><a href="{% url 'usuarios:login' %}">Logout</a></li>
+            <li><a href="{% url 'usuarios:edit' %}">Mi cuenta</a></li>
+    {% else %}
+            <li><a href="{% url 'usuarios:login' %}">Login</a></li>
+            <li><a href="{% url 'usuarios:register' %}">Registro</a></li>
+    {% endif %}
+    <li><hr></li>
+    <li><a href="{% url 'catalog:index' %}">Home</a></li>
+    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
+    <li><a href="{% url 'catalog:about' %}">Acerca de...</a></li>
+    <li><a href="#">Contactos</a></li>
+    <li><a href="{% url 'catalog:new-product' %}">Nuevo producto</a></li>
+    <li><hr></li>
+    <li><a href="#">Carrito</a></li>
+    <li><hr></li>
+    <li>
+        <form method="get" action="{% url 'catalog:find_by_title' %}">
+            <div class="input-field">
+                <input name="search" id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </li>
+</ul>

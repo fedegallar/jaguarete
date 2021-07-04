@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-content">
+    <form method="POST" action="{% url 'usuarios:edit' %}">
+        {% csrf_token %}
+        <div class="card-title">Datos de la cuenta</div>
+        <div class="row">
+            <div class="col s6">
+                <label for="password">Contraseña:</label>
+                {{editForm.password}}
+            </div>
+        </div>
+        <div class="card-title">Datos personales</div>
+        <div class="row">
+            <div class="col s6">
+                <label for="first_name">Nombres:</label>
+                {{editForm.first_name}}
+            </div>
+            <div class="col s6">
+                <label for="last_name">Apellidos:</label>
+                {{editForm.last_name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <label for="cuilcuit">CUIL/CUIT:</label>
+                {{editForm.cuilcuit}}
+            </div>
+            <div class="col s4">
+                <label for="email">Correo:</label>
+                {{editForm.email}}
+            </div>
+            <div class="col s4">
+                <label for="telefono">Teléfono:</label>
+                {{editForm.telefono}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <label for="domicilio">domicilio:</label>
+                {{editForm.domicilio}}
+            </div>
+            <div class="col s4">
+                <label for="ciudad">Ciudad:</label>
+                {{editForm.ciudad}}
+            </div>
+            <div class="col s4">
+                <label for="provincia">Provincia:</label>
+                {{editForm.provincia}}
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="right btn waves-effect waves-light">Guardar cambios</button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 
 from .models import Category, Product
-from .forms import ProductForm
+from .forms import AddToCarritoForm, ProductForm
 # Create your views here.
 
 
@@ -29,7 +29,8 @@ def find_by_title(request):
 
 def view_product(request, id):
     product = Product.objects.get(id=id)
-    return render(request, "catalog/view.html", {'product': product})
+    addToCarritoForm = AddToCarritoForm(initial={'id':id})
+    return render(request, "catalog/view.html", {'product': product,'addToCarritoForm': addToCarritoForm })
 
 def new_product(request):
     if request.method == 'POST':

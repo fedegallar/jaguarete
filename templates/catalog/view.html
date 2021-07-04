@@ -14,9 +14,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <a class="waves-effect waves-light btn-large pulse"><i class="material-icons right">add_shopping_cart</i>Añadir al carrito</a>
-            </div>
+            <form action="{% url 'carrito:AddProductToCarrito' %}" method="POST">
+                {% csrf_token %}
+                <div class="col s1">
+                    {{ addToCarritoForm }}
+                </div>
+                <div class="col s11">
+                    <button type="submit" class="right waves-effect waves-light btn-large pulse"><i class="material-icons right">add_shopping_cart</i>Añadir al carrito</button>
+                </div>
+            </form>
         </div>
         <div class="row">
             <div class="col">

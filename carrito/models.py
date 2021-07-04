@@ -8,6 +8,12 @@ class Carrito(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     carrito_productos = models.ManyToManyField(Product, through='CarritoProducto')
 
+    def getProductosList(self):
+        return CarritoProducto.objects.filter(carrito=self)
+        
+    
+
+
 class CarritoProducto(models.Model):
      carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
      product = models.ForeignKey(Product, on_delete=models.CASCADE)

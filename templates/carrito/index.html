@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 {% block content  %}
+{% load mathfilters %}
 <div class="card">
     <div class="card-content">
         <div class="row">
-            <div class="col s6">Item</div>
-            <div class="col s2">Subtotal</div>
-            <div class="col s4">Acciones</div>
+            <div class="col s6"><strong>Item</strong></div>
+            <div class="col s2"><strong>Subtotal</strong></div>
+            <div class="col s4"><strong>Acciones</strong></div>
         </div>
         <hr>
         {% if carritoProductos %}
         {% for cp in carritoProductos %}
         <div class="row">
             <div class="col s6 text-align-right">{{cp.product.title}}</div>
-            <div class="col s2">{{cp.product.price}}</div>
-            <div class="col s2">Borrar</div>
-            <div class="col s2">Modificar</div>
+            {% with answer=cp.product.price%}
+            <div class="col s2">${{ answer|mul:cp.quantity }}</div>
+            {% endwith %}
+            <div class="col s1">Borrar</div>
+            <div class="col s1">Modificar</div>
         </div>
         <hr>
         {% endfor %}

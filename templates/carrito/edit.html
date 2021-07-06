@@ -1,0 +1,5 @@
+<form action="{% url 'carrito:edit' id=id %}" method="POST">
+    {% csrf_token %}
+    {{editform}}
+    <button type="submit" class="modal-close waves-effect waves-green btn">Editar</a>
+</form>

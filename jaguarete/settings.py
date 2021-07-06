@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'usuarios.apps.UsuariosConfig',
+    'carrito.apps.CarritoConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/product_images/'
-MEDIA_ROOT = MEDIA_ROOT = os.path.join(BASE_DIR, "product_images")
+MEDIA_ROOT = MEDIA_ROOT = os.path.join(BASE_DIR, 'product_images')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),

@@ -10,7 +10,7 @@
                         <div class="card-image image-size-medium">
                             <img class="img-index" src="{{ p.image }}">
                         </div>
-                        <pan class="grey-text text-darken-4 card-text">{{ p.title }}</pan>
+                        <pan class="grey-text text-darken-4 card-text hide-on-small-only">{{ p.title }}</pan>
                         <div class="card-action">
                             <a href="{% url 'catalog:view_product' id=p.id %}">Ver</a>
                         </div>

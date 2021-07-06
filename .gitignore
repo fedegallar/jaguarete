@@ -2,6 +2,8 @@
 .vscode/
 ./product_images/
 ./db.sqlite3
+media/
+static/
 **/*.pdf
 **/*.pyc
 **/*.jpg

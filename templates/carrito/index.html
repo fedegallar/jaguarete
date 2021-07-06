@@ -1,32 +1,56 @@
 {% extends 'base.html' %}
 {% block content  %}
+{% load mathfilters %}
+{% load static %}
 <div class="card">
     <div class="card-content">
-        <div class="row">
-            <div class="col s6">Item</div>
-            <div class="col s2">Subtotal</div>
-            <div class="col s4">Acciones</div>
-        </div>
-        <hr>
-        {% if carritoProductos %}
-        {% for cp in carritoProductos %}
-        <div class="row">
-            <div class="col s6 text-align-right">{{cp.product.title}}</div>
-            <div class="col s2">{{cp.product.price}}</div>
-            <div class="col s2">Borrar</div>
-            <div class="col s2">Modificar</div>
-        </div>
-        <hr>
-        {% endfor %}
-        <div class="row">
-            <div class="col s10">
-                <div class="right"><strong>TOTAL:</strong></div>
+        {% if vacio %}
+            <div class="card-title center-align">El carrito se encuentra vacio. Añade productos.</div>
+        {% else %}
+            <div class="row">
+                <div class="col s6"><strong>Item</strong></div>
+                <div class="col s2"><strong>Subtotal</strong></div>
+                <div class="col s4"><strong>Acciones</strong></div>
             </div>
-            <div class="col s2">
-                <div class="left"><strong>{{total}}</strong></div>
+            <hr>
+            {% if carritoProductos %}
+            {% for cp in carritoProductos %}
+            <div class="row">
+                <div class="col s6 text-align-right">{{cp.product.title}}</div>
+                {% with answer=cp.product.price%}
+                <div class="col s2">${{ answer|mul:cp.quantity }}</div>
+                {% endwith %}
+                <div class="col s1">
+                    <button href="{% url 'carrito:remove' id=cp.id %}" class="eliminar red waves-effect waves-light btn-small">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+                <div class="col s1">
+                    <a href="#" django-url="{% url 'carrito:edit' id=cp.id %}" data-target="modal1" class="lime waves-effect waves-light btn-small modal-trigger editar">
+                        <i class="material-icons">edit</i>
+                    </a>
+                </div>
             </div>
-        </div>
+            <hr>
+            {% endfor %}
+            <div class="row">
+                <div class="col s10">
+                    <div class="right"><strong>TOTAL:</strong></div>
+                </div>
+                <div class="col s2">
+                    <div class="left"><strong>{{total}}</strong></div>
+                </div>
+            </div>
+            {% endif %}
         {% endif %}
     </div>
 </div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Editar cantidad</h4>
+      <div class="contentForm"></div>
+    </div>
+  </div>
+<script src="{% static 'js/carrito/index.js' %}"></script>
     {% endblock  %}

@@ -10,12 +10,12 @@ from carrito.forms import AddToCarritoForm
 
 def index(request):
     products = Product.objects.order_by("-pk")[:10]
-    categories = Category.objects.all()
     main_products = products[:3]
     second_products = products[4:10]
-    return render(request, "catalog/index.html", {"categories": categories, "main_products": main_products, "second_products": second_products})
+    return render(request, "catalog/index.html", {"main_products": main_products, "second_products": second_products})
 
-def find_by_category(request, category):
+def find_by_category(request, idCategory):
+    category = Category.objects.get(pk=idCategory)
     products = Product.objects.filter(category=category).order_by("-pk")[:10]
     main_products = products[:3]
     second_products = products[4:10]
@@ -57,7 +57,7 @@ def delete_product(request, id):
     product_delete = get_object_or_404(Product, pk=id)
     title = product_delete.title
     product_delete.delete()
-    return redirect('index')
+    return redirect(reverse('catalog:index'))
 
 def about(request):
     return render(request, "catalog/about.html", {})

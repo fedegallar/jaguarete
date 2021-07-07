@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.models import Group
 from django.urls.base import reverse
 from .forms import NewUserForm, EditUserForm, LoginForm, ForgotPasswordForm
 from .models import Usuario
@@ -50,6 +51,9 @@ def register(request):
                     usuario = Usuario(username=username, first_name=first_name, last_name=last_name,
                     cuilcuit=cuilcuit, email=email, telefono=telefono, domicilio=domicilio, ciudad=ciudad, provincia=provincia, is_active=True)
                     usuario.set_password(password)
+                    usuario.save()
+                    usuario_group = Group.objects.get(name='Usuario')
+                    usuario.groups.add(usuario_group)
                     usuario.save()
                     return redirect(reverse('usuarios:login'))
                 else:

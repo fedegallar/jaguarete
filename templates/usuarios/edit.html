@@ -60,4 +60,7 @@
     </form>
     </div>
 </div>
+{% if message %}<div id="message" class="m"></div>{% endif %}
+{%load static %}
+<script src="{% static 'js/usuario/edit.js' %}"></script>
 {% endblock %}

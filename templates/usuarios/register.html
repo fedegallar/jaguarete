@@ -2,7 +2,7 @@
 {% block content %}
 <div class="card">
     <div class="card-content">
-    <form method="POST" action="{% url 'usuarios:login' %}">
+    <form method="POST" action="{% url 'usuarios:register' %}">
         {% csrf_token %}
         <div class="card-title">Datos de la cuenta</div>
         <div class="row">
@@ -10,9 +10,13 @@
                 <label for="username">Nombre de usuario:</label>
                 {{registerForm.username}}
             </div>
-            <div class="col s6">
+            <div class="col s3">
                 <label for="password">Contraseña:</label>
                 {{registerForm.password}}
+            </div>
+            <div class="col s3">
+                <label for="password">Confirmar contraseña:</label>
+                {{registerForm.confirm_password}}
             </div>
         </div>
         <div class="card-title">Datos personales</div>

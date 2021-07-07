@@ -34,15 +34,37 @@ def register(request):
     if request.user.is_authenticated:
         return redirect(reverse('catalog:index'))
     else:
-        registerForm = NewUserForm
-        return render(request, 'usuarios/register.html',{'registerForm': registerForm})
+        if request.method == 'POST':
+                registerForm = NewUserForm(request.POST)
+                if registerForm.is_valid():
+                    password = registerForm.cleaned_data['password']
+                    username = registerForm.cleaned_data['username']
+                    first_name = registerForm.cleaned_data['first_name']
+                    last_name = registerForm.cleaned_data['last_name']
+                    cuilcuit = registerForm.cleaned_data['cuilcuit']
+                    email = registerForm.cleaned_data['email']
+                    telefono = registerForm.cleaned_data['telefono']
+                    domicilio = registerForm.cleaned_data['domicilio']
+                    ciudad = registerForm.cleaned_data['ciudad']
+                    provincia = registerForm.cleaned_data['provincia']
+                    usuario = Usuario(username=username, first_name=first_name, last_name=last_name,
+                    cuilcuit=cuilcuit, email=email, telefono=telefono, domicilio=domicilio, ciudad=ciudad, provincia=provincia, is_active=True)
+                    usuario.set_password(password)
+                    usuario.save()
+                    return redirect(reverse('usuarios:login'))
+                else:
+                    return render(request, 'usuarios/register.html',{'registerForm': registerForm})
+        else:
+            registerForm = NewUserForm
+            return render(request, 'usuarios/register.html',{'registerForm': registerForm})
     
 def edit(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            editForm = EditUserForm(request.POST)
-            editForm.save()
-            return render(request, 'usuarios/edit.html',{'editForm': editForm})
+            editForm = EditUserForm(request.POST, instance=request.user)
+            if editForm.is_valid():
+                editForm.save()
+                return render(request, 'usuarios/edit.html',{'editForm': editForm, 'message': 'Usuario editado.'})
         else:
             editForm = EditUserForm(instance=request.user)
             return render(request, 'usuarios/edit.html',{'editForm': editForm})

@@ -1,14 +1,14 @@
 <ul id="dropdownsmall" class="dropdown-content">
-    {% for category in categories %}
-    <li>{{ category.description }}</li>
+    {% for category in all_categories %}
+    <li><a href="{% url 'catalog:find_by_category' idCategory=category.id %}">{{ category.description }}</a></li>
     {% endfor %}
     <li class="divider"></li>
     <li><a href="{% url 'catalog:category:new' %}">Nueva categoria</a></li>
 </ul>
 
 <ul id="dropdownnav" class="dropdown-content">
-    {% for category in categories %}
-    <li>{{ category.description }}</li>
+    {% for category in all_categories %}
+    <li><a href="{% url 'catalog:find_by_category' idCategory=category.id %}">{{ category.description }}</a></li>
     {% endfor %}
     <li class="divider"></li>
     <li><a href="{% url 'catalog:category:new' %}">Nueva categoria</a></li>

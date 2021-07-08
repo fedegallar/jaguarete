@@ -53,6 +53,13 @@ def EditProductoFromCarrito(request, id):
         html = render_to_string('carrito/edit.html',{'editform':editform, 'id':id, 'csrf_token':csrf_token})
         return HttpResponse(html)
 
+def DestroyCarrito(request):
+    carrito = Carrito.objects.get(usuario=request.user)
+    productListCarrito = CarritoProducto.objects.filter(carrito=carrito)
+    productListCarrito.delete()
+    carrito.delete()
+    return redirect(reverse('carrito:index'))
+
 
 def RemoveProductoFromCarrito(request, id):
     try:

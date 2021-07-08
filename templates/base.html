@@ -41,7 +41,7 @@
                         <ul class="left hide-on-med-and-down">
                             <li><a href="{% url 'catalog:index' %}">Home<i class="large material-icons left">home</i></a></li>
                             <li><a class="dropdown-trigger" href="#!" data-target="dropdownnav">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
-                            <li><a href="#">Contacto</a></li>
+                            <li><a href="mailto:fedegallar2006@jaguarete.com">Contacto</a></li>
                             <li><a href="{% url 'catalog:about' %}">Acerca de...</a></li>
                             {% if request.user|has_group:"Moderador" %}
                                 <li><a href="{% url 'catalog:new-product' %}">Nuevo producto<i class="material-icons right">add</i></a></li>
@@ -65,7 +65,20 @@
         <div class="container">
             {% block content %}{% endblock %}
         </div>
-        <footer>
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Jaguarete Kaa S.A</h5>
+                <p class="grey-text text-lighten-4">Creado por Federico Javier Gallardo</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2020 Copyright todos los derechos reservados
+            </div>
+          </div>
         </footer>
     </body>
 </html>

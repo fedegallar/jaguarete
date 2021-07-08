@@ -43,6 +43,18 @@
                     <div class="left"><strong>{{total}}</strong></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'carrito:destroy' %}" class="red waves-effect waves-light btn-small">
+                        <i class="material-icons">remove_shopping_cart</i>Vaciar carrito
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="eliminar green waves-effect waves-light btn-small">
+                        <i class="material-icons">attach_money</i>Finalizar compra
+                    </a>
+                </div>
+            </div>
             {% endif %}
         {% endif %}
     </div>

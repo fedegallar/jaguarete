@@ -1,3 +1,4 @@
+{%load belongs_group %}
 <ul id="dropdownsmall" class="dropdown-content">
     {% for category in all_categories %}
     <li><a href="{% url 'catalog:find_by_category' idCategory=category.id %}">{{ category.description }}</a></li>
@@ -10,6 +11,8 @@
     {% for category in all_categories %}
     <li><a href="{% url 'catalog:find_by_category' idCategory=category.id %}">{{ category.description }}</a></li>
     {% endfor %}
-    <li class="divider"></li>
-    <li><a href="{% url 'catalog:category:new' %}">Nueva categoria</a></li>
+    {% if request.user|has_group:"Moderador" %}
+        <li class="divider"></li>
+        <li><a href="{% url 'catalog:category:new' %}">Nueva categoria</a></li>
+    {% endif %}
 </ul>

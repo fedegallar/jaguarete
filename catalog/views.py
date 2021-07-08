@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 
 from .models import Category, Product
-from .forms import ProductForm
+from .forms import NewProductForm, EditProductForm
 from carrito.forms import AddToCarritoForm
 # Create your views here.
 
@@ -35,22 +35,29 @@ def view_product(request, id):
 
 def new_product(request):
     if request.method == 'POST':
-        productForm = ProductForm(request.POST, request.FILES)
+        productForm = NewProductForm(request.POST, request.FILES)
         if productForm.is_valid():
             productForm.save()
             return HttpResponseRedirect(reverse('catalog:index'))
         print(productForm.errors)
         return redirect(reverse('catalog:new-product'))
     else:
-        form = ProductForm
-        title = "Nuevo producto"
-        return render(request, "catalog/form.html", {"formulario": form, "title": title})
+        form = NewProductForm
+        return render(request, "catalog/new.html", {"formulario": form})
 
 
-def edit_product(request, id):
-    edit_product = get_object_or_404(Product, pk=id)
-    form = ProductForm(instance=edit_product)
-    return render(request, "catalog/form.html", {"formulario":form, "title": f'Editar {edit_product.category} - {edit_product.title}'})
+def edit(request, id):
+    product = Product.objects.get(id=id)
+    if request.method == "POST":
+        producto = Product.objects.get(id=id)
+        editform = EditProductForm(request.POST, request.FILES, instance=producto)
+        if editform.is_valid():
+            editform.save()
+            return render(request, "catalog/edit.html", {'id':product.id, "formulario":editform, "title": f'Editar {product.category} - {product.title}(Guardado)'})
+        return render(request, "catalog/edit.html", {'id':product.id, "formulario":editform, "title": f'Editar {product.category} - {product.title}(Error)'}) 
+    else:
+        editform = EditProductForm(instance=product)
+        return render(request, "catalog/edit.html", {'id':product.id, "formulario": editform, "title": f'Editar {product.category} - {product.title}'})
 
 
 def delete_product(request, id):

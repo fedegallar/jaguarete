@@ -10,16 +10,17 @@ def usuario_group_middleware(get_response):
             grupo=request.user.groups.all()
             if request.user.is_superuser & request.user.is_staff:
                 return response
-            if grupo[0].name == 'Usuario':
-                if re.search('producto/[0-9]+/edit',request.path):
-                    return redirect('catalog:index')
-                elif re.search('producto/[0-9]+/delete',request.path):
-                    return redirect('catalog:index')
-                else:
-                    pass
-            if grupo[0].name == 'Moderador':
-                if 'carrito/' in request.path:
-                    return redirect('catalog:index')
+            else:
+                if grupo[0].name == 'Usuario':
+                    if re.search('producto/[0-9]+/edit',request.path):
+                        return redirect('catalog:index')
+                    elif re.search('producto/[0-9]+/delete',request.path):
+                        return redirect('catalog:index')
+                    else:
+                        pass
+                if grupo[0].name == 'Moderador':
+                    if 'carrito/' in request.path:
+                        return redirect('catalog:index')
         return response
 
     return middleware

@@ -4,7 +4,7 @@
     <div class="card-panel card-margin-sides">
         <form method="POST" action="{% url 'catalog:new-product' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <h5>{{title}}</h5>
+            <h5>Nuevo producto</h5>
             <hr>
             <div class="row">
                 <label for="{{ formulario.title.id_for_label }}">Título:</label>

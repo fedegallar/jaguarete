@@ -31,3 +31,21 @@ nav{
         }
     }
 }
+
+.cart-form{
+    display: flex;
+    align-items: center;
+}
+
+.card-price {
+    display: flex;
+    width: 100%;
+    background-color: #4fc3f7;
+    padding-inline: 8%;
+    opacity: 75%;
+    color: black;
+    padding-top: 0px;
+    height: 26%;
+    align-items: flex-start;
+    justify-content: space-around;
+}

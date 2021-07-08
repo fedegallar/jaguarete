@@ -11,6 +11,7 @@
     {% load static %}
     <script src="{% static 'base.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {%load belongs_group %}
 </head>
     <body>
         <header>
@@ -25,7 +26,9 @@
                             {% if user.is_authenticated %}
                             <li><a href="{% url 'usuarios:logout' %}">Logout</a></li>
                             <li><a href="{% url 'usuarios:edit' %}">Mi cuenta</a></li>
-                            <li><a href="{% url 'carrito:index' %}">Carrito</a></li>
+                                {% if request.user|has_group:"Usuario" %}
+                                    <li><a href="{% url 'carrito:index' %}">Carrito</a></li>
+                                {% endif %}
                             {% else %}
                             <li><a href="{% url 'usuarios:login' %}">Login</a></li>
                             <li><a href="{% url 'usuarios:register' %}">Registro</a></li>
@@ -40,7 +43,9 @@
                             <li><a class="dropdown-trigger" href="#!" data-target="dropdownnav">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
                             <li><a href="#">Contacto</a></li>
                             <li><a href="{% url 'catalog:about' %}">Acerca de...</a></li>
-                            <li><a href="{% url 'catalog:new-product' %}">Nuevo producto<i class="material-icons right">add</i></a></li>
+                            {% if request.user|has_group:"Moderador" %}
+                                <li><a href="{% url 'catalog:new-product' %}">Nuevo producto<i class="material-icons right">add</i></a></li>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="col s3 m3 l3">

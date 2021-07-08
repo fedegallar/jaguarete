@@ -6,8 +6,14 @@ from .models import Product, Category
 CATEGORIES = Category.objects.all()
 
 
-class ProductForm(ModelForm):
+class NewProductForm(ModelForm):
 
+    class Meta:
+        model=Product
+        fields=['title','description','image','category','price','stock']
+
+class EditProductForm(ModelForm):
+    
     class Meta:
         model=Product
         fields=['title','description','image','category','price','stock']
